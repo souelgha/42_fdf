@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int code_rgb(unit8_t red, unit8_t green, unit8_t blue)
-{
-	return (red << 16 | green << 8 | blue);
-}
+// int code_rgb(unit8_t red, unit8_t green, unit8_t blue)
+// {
+// 	return (red << 16 | green << 8 | blue);
+// }
 
 int main()
 {
