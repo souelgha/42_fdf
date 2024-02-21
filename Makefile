@@ -17,7 +17,8 @@ LIBX_MAKE = Makefile
 LIBX = $(LIBX_PATH)/libmlx.a
 
 #SOURCES
-SRC =  	test3.c
+SRC =  	test3.c\
+		utils_hooks.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
