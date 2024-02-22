@@ -12,13 +12,14 @@ OBJ_PATH = obj/
 HEADER_FOLDER = includes
 
 #MINILIBX
-LIBX_PATH = minilibx-linux
-LIBX_MAKE = Makefile
-LIBX = $(LIBX_PATH)/libmlx.a
+#LIBX_PATH = minilibx-linux
+#LIBX_MAKE = Makefile
+#LIBX = $(LIBX_PATH)/libmlx.a
 
 #SOURCES
-SRC =  	test3.c\
-		utils_hooks.c
+SRC =  	fdf.c\
+		utils_hooks.c\
+		check_functions.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
@@ -29,7 +30,7 @@ INCS	= -I ./includes/
 all: $(NAME) 
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ libmlx.a $(CLIBX)
+	$(CC) $(CFLAGS) $(OBJS) -o $@ libmlx.a libft.a $(CLIBX)
 	@echo "$(GREEN) compilation ok $(RESET)"
 
 #OBJECTS
@@ -39,6 +40,8 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	fi
 	make -sC ./minilibx-linux
 	cp ./minilibx-linux/libmlx.a .
+	make -sC ./libft
+	cp ./libft/libft.a .
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCS) 
 
 
@@ -46,7 +49,9 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 clean:
 	rm -rf $(OBJ_PATH)
 	make clean -C ./minilibx-linux
+	make clean -C ./libft
 	rm -f libmlx.a
+	rm -f libft.a
 	@echo "$(CLEAR) $(BLUE) cleaned $(RESET)"
 
 	
