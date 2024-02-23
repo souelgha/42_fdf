@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:09 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/22 16:43:19 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:31:57 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	render(t_data *data)
 	return (0);
 }
 
- int code_trgb(int t, int red, int green, int blue)
+ int code_rgb(int red, int green, int blue)
 {
- 	return (t << 24 | red << 16 | green << 8 | blue);
+ 	return (red << 16 | green << 8 | blue);
 }

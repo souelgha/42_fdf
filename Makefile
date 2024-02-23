@@ -19,7 +19,8 @@ HEADER_FOLDER = includes
 #SOURCES
 SRC =  	fdf.c\
 		utils_hooks.c\
-		check_functions.c
+		check_functions.c\
+		parsing_file.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

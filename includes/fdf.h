@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/22 17:24:09 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:00:05 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 typedef struct s_img
 {
@@ -49,6 +50,25 @@ typedef struct s_rect
     int color;
 }	t_rect;
 
+/*** structure du pixel, x, y, z, color ***/
+typedef struct s_pix
+{
+	int		posx;
+	int		posy;
+	int		height;
+	char	*color;
+
+}	t_pix;
+
+/****structure du fichier *****/
+typedef struct s_file
+{
+	int	lines;
+	int	columns;
+	int	filepix;
+
+}	t_file;
+
 int		close_win(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 int 	code_trgb(int t, int red, int green, int blue);
@@ -59,5 +79,7 @@ int		render(t_data *data);
 int		keyfunc(int keysym);
 
 int check_arg(int argc, char **argv);
+int	pars_file(char *file, t_pix *pix, t_file *data);
+void	onepix(t_pix *pix, int	i, int j, char *pixel);
 
 # endif

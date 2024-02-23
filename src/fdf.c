@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/22 17:23:55 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:23:09 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 int main(int argc, char **argv)
 {
 	t_data data;
+	t_pix	pix;
+	t_file	file;
+	
 	if(!check_arg(argc, argv))
 		return(1);
+	pars_file(argv[1], &pix, &file);
 	data.mlx_connect = mlx_init(); 
 	if (!data.mlx_connect)
 	{
