@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/23 17:00:05 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:21:32 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,22 @@ typedef struct s_rect
 /*** structure du pixel, x, y, z, color ***/
 typedef struct s_pix
 {
-	int		posx;
-	int		posy;
-	int		height;
-	char	*color;
+	int				x_map;
+	int				y_map;
+	int				height;
+	char			*color;
+	int				x_pix;
+	int				y_pix;
+	struct s_pix	*next;
 
 }	t_pix;
 
 /****structure du fichier *****/
 typedef struct s_file
 {
-	int	lines;
-	int	columns;
-	int	filepix;
+	int	x;  //x
+	int	y;
+	int	pix;
 
 }	t_file;
 
@@ -78,8 +81,12 @@ int 	render_rect(t_img *img, t_rect rect);
 int		render(t_data *data);
 int		keyfunc(int keysym);
 
-int check_arg(int argc, char **argv);
-int	pars_file(char *file, t_pix *pix, t_file *data);
-void	onepix(t_pix *pix, int	i, int j, char *pixel);
+int 	check_arg(int argc, char **argv);
+int		pars_file(char *file, t_pix **pix);
+t_pix	*newpix(int	i, int j, char *pixel);
+void	initmap(t_pix **map, int i, int j, char *pix);
+void	ft_lstclear_s(t_pix **lst);
+void	ft_lstadd_back_s(t_pix **lst, t_pix *new_node);
+void	affiche_list(t_pix *map);
 
 # endif

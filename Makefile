@@ -3,7 +3,7 @@ NAME = fdf
 
 #COMPIL
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -g2
 CLIBX = -lXext -lX11
 
 #DIRECTORY
@@ -15,12 +15,14 @@ HEADER_FOLDER = includes
 #LIBX_PATH = minilibx-linux
 #LIBX_MAKE = Makefile
 #LIBX = $(LIBX_PATH)/libmlx.a
+ARGS = 2lines.fdf
 
 #SOURCES
 SRC =  	fdf.c\
 		utils_hooks.c\
 		check_functions.c\
-		parsing_file.c
+		parsing_file.c\
+		lst_utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
@@ -65,6 +67,11 @@ re: fclean all
 .PHONY: all clean fclean re
 
 .SILENT: clean fclean
+
+valgrind: clean all
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s \
+	--track-origins=yes --trace-children=yes --track-fds=yes --track-origins=yes \
+	 ./$(NAME) $(ARGS)
 
 RED = \033[0;31m
 GREEN = \033[0;32m
