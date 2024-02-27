@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/26 17:28:45 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:35:34 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@ int main(int argc, char **argv)
 	if(!check_arg(argc, argv))
 		return(1);
 	pars_file(argv[1], &pix);
-	affiche_list(pix);
-	
+	affiche_list(pix);	
 	data.mlx_connect = mlx_init(); 
 	if (!data.mlx_connect)
 	{
 		free(data.mlx_connect);
 		return (1);
-	}		
-
-	data.mlx_window = mlx_new_window(data.mlx_connect, 600, 400, "first window"); 
+	}
+	data.mlx_window = mlx_new_window(data.mlx_connect, 1900, 1200, "first window"); 
 	if (!data.mlx_window)
 	{
 		mlx_destroy_display(data.mlx_connect);
@@ -44,7 +42,7 @@ int main(int argc, char **argv)
 	mlx_hook(data.mlx_window, 17, 1L<<5, close_win, &data);
 	mlx_hook(data.mlx_window, KeyPress, KeyPressMask, handle_keypress, &data);
 	mlx_key_hook(data.mlx_window, keyfunc, 0);
-	mlx_string_put(data.mlx_connect, data.mlx_window, 600 * 0.8, 400 * 0.95, 0xFF0000, "first test");
+	mlx_string_put(data.mlx_connect, data.mlx_window, 1800 * 0.8, 1000 * 0.95, 0xFF0000, "first test");
 	mlx_loop(data.mlx_connect);
 	mlx_destroy_image(data.mlx_connect, data.img.img_ptr);
 	mlx_destroy_display(data.mlx_connect);

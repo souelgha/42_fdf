@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/26 17:23:25 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:40:33 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ t_pix	*newpix(int	i, int j, char *pixel)
 	new_node->y_map = j;
 	data = ft_split(pixel, ',');
 	new_node->height = ft_atoi(data[0]);
-	if (data[1])
-		new_node->color = data[1];
-	else 
-		new_node->color = "0";
+	new_node->color = ft_atoi_hexa(data[1]);
 	new_node->x_pix = 0;
 	new_node->y_pix = 0;
 	new_node->next = NULL;	
@@ -99,7 +96,8 @@ void	affiche_list(t_pix *map)
 	ptr = map;
 	while(ptr)
 	{
-		printf("x(%d)\ty(%d)\th(%d)\tc(%s)\n", ptr->x_map, ptr->y_map, ptr->height, ptr->color);
+		printf("x_map(%d)\ty_map(%d)\theight(%d)\tcolor(%ld)\tx_pix(%d)\ty_pix(%d)\n", 
+					ptr->x_map, ptr->y_map, ptr->height, ptr->color, ptr->x_pix, ptr->y_pix);
 		ptr = ptr->next;
 	}
 }

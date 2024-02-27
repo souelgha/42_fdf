@@ -1,49 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_file.c                                     :+:      :+:    :+:   */
+/*   utils_colorscopy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 10:20:21 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/27 11:30:12 by sonouelg         ###   ########.fr       */
+/*   Created: 2024/02/27 11:03:02 by sonouelg          #+#    #+#             */
+/*   Updated: 2024/02/27 11:23:15 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+//#include "fdf.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-int	pars_file(char *file, t_pix **map) //argv[1] & list
+size_t	ft_strlen(const char *str)
 {
-    int		fd;
-	int		i;
-	int		j;
-    char	*next_line;
-	char 	**pixel;
+	size_t	i;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return(1);
-	printf("fd = %d\n", fd);
 	i = 0;
-	j = 0;
-	next_line = get_next_line(fd);
-	while (next_line)
-	{
-		pixel = ft_split(next_line, ' ');
-		while (pixel[i])
-		{
-			initmap(map, i, j, pixel[i]);
-			i++;
-		}
-		free(next_line);
-		free(pixel);
-		next_line = get_next_line(fd);
-		j++;	
-		i = 0;
-	}
-	free(next_line);
-    return (0);
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
+
+char	*ft_strchr(const char *str, int c)
+{
+	int		i;
+
+	if (c == '\0')
+		return ((char *)&str[ft_strlen(str)]);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return ((char *)(str + i));
+		i++;
+	}
+	return (0);
+}
+
+
 unsigned long	ft_atoi_hexa(const char *str)
 {
 	const char		*hex;
@@ -52,8 +49,9 @@ unsigned long	ft_atoi_hexa(const char *str)
 	int 			i;
 
 	hex = "0123456789ABCDEF";
-	result = 0;	
-	if (!str)
+	result = 0;
+	
+	if (str[0] == '0' && str[1] != 'x')
 		return (0);
 	i = 2;
 	while (str[i] != '\0' && str[i] != '\n')
@@ -65,4 +63,12 @@ unsigned long	ft_atoi_hexa(const char *str)
 		i++;
 	}
 	return (result);
+}
+
+int main()
+{
+	const char	*color = "0";
+	unsigned long result = ft_atoi_hexa(color);
+	printf("res = %ld", result);
+	return (0);
 }

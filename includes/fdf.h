@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/26 17:21:32 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:57:19 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,25 @@ typedef struct s_rect
     int color;
 }	t_rect;
 
-/*** structure du pixel, x, y, z, color ***/
+/*** structure du point dans la map ***/
 typedef struct s_pix
 {
 	int				x_map;
 	int				y_map;
 	int				height;
-	char			*color;
+	unsigned long	color;
 	int				x_pix;
 	int				y_pix;
 	struct s_pix	*next;
+	void			*line_down;	// lien vers le bas
+	void			*line_right; // lien vers la droite 
 
 }	t_pix;
 
 /****structure du fichier *****/
 typedef struct s_file
 {
-	int	x;  //x
+	int	x;  
 	int	y;
 	int	pix;
 
@@ -76,6 +78,7 @@ int		close_win(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 int 	code_trgb(int t, int red, int green, int blue);
 void	color_rect(t_data *data, int color);
+unsigned long	ft_atoi_hexa(const char *str);
 void	my_pixel_put(t_img *img,int x, int y, int color);
 int 	render_rect(t_img *img, t_rect rect);
 int		render(t_data *data);
