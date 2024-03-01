@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/27 11:57:19 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:32:16 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 #include <stdio.h>
 #include <fcntl.h>
 
+# define WINX 1920	
+# define WINY 1080
+# define IMGX 900	
+# define IMGY 500
+
 typedef struct s_img
 {
 	void	*img_ptr; //ptr sur l image
@@ -34,12 +39,7 @@ typedef struct s_img
 	int		endian; // type d endian
 }	t_img;
 
-typedef struct	s_data
-{
-	void	*mlx_connect;
-	void	*mlx_window;
-	t_img	img;
-}	t_data;
+
 
 typedef struct s_rect
 {
@@ -60,10 +60,20 @@ typedef struct s_pix
 	int				x_pix;
 	int				y_pix;
 	struct s_pix	*next;
-	void			*line_down;	// lien vers le bas
-	void			*line_right; // lien vers la droite 
+	struct s_pix	*line_down;	// lien vers le bas
+	struct s_pix	*line_right; // lien vers la droite 
 
 }	t_pix;
+
+typedef struct	s_data
+{
+	void	*mlx_connect;
+	void	*mlx_window;
+	int		x_colunms;
+	int		y_row;
+	t_img	img;
+	t_pix	*node;
+}	t_data;
 
 /****structure du fichier *****/
 typedef struct s_file
@@ -80,10 +90,9 @@ int 	code_trgb(int t, int red, int green, int blue);
 void	color_rect(t_data *data, int color);
 unsigned long	ft_atoi_hexa(const char *str);
 void	my_pixel_put(t_img *img,int x, int y, int color);
-int 	render_rect(t_img *img, t_rect rect);
 int		render(t_data *data);
 int		keyfunc(int keysym);
-
+int		config_win_img(t_data *data);
 int 	check_arg(int argc, char **argv);
 int		pars_file(char *file, t_pix **pix);
 t_pix	*newpix(int	i, int j, char *pixel);
@@ -91,5 +100,10 @@ void	initmap(t_pix **map, int i, int j, char *pix);
 void	ft_lstclear_s(t_pix **lst);
 void	ft_lstadd_back_s(t_pix **lst, t_pix *new_node);
 void	affiche_list(t_pix *map);
+void 	connect_right(t_pix *head);
+void 	connect_down(t_pix *head);
+void 	file_colums_rows(t_data *data);
+void	destroy_fct(t_data *data);
+
 
 # endif

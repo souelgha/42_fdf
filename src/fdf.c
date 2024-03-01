@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/27 15:35:34 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:33:22 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,24 @@
 int main(int argc, char **argv)
 {
 	t_data	data; 	//connect & window
-	t_pix	*pix;	//liste chainee pixel
-	
-	pix = NULL;
+
+	data.node = NULL;
 	if(!check_arg(argc, argv))
 		return(1);
-	pars_file(argv[1], &pix);
-	affiche_list(pix);	
-	data.mlx_connect = mlx_init(); 
-	if (!data.mlx_connect)
-	{
-		free(data.mlx_connect);
-		return (1);
-	}
-	data.mlx_window = mlx_new_window(data.mlx_connect, 1900, 1200, "first window"); 
-	if (!data.mlx_window)
-	{
-		mlx_destroy_display(data.mlx_connect);
-		free(data.mlx_window);
-		return (1);
-	}
-	data.img.img_ptr =  mlx_new_image(data.mlx_connect, 400, 300);
-	data.img.addr_pix = mlx_get_data_addr(data.img.img_ptr, &data.img.bpp, &data.img.line_len, &data.img.endian);
-	mlx_loop_hook(data.mlx_connect, render, &data);
-	printf("line_len=%d\nbpp=%d\nendian=%d\n", data.img.line_len, data.img.bpp, data.img.endian);
+	pars_file(argv[1], &data.node);
+	connect_right(data.node);
+	connect_down(data.node);
+	printf("\n");	
+	//affiche_list(data.node);
+	file_colums_rows(&data);
+	config_win_img(&data);
+	mlx_loop_hook(data.mlx_connect, render, &data);	
+	//printf("line_len=%d\nbpp=%d\nendian=%d\n", data.img.line_len, data.img.bpp, data.img.endian);
 	mlx_hook(data.mlx_window, 17, 1L<<5, close_win, &data);
 	mlx_hook(data.mlx_window, KeyPress, KeyPressMask, handle_keypress, &data);
 	mlx_key_hook(data.mlx_window, keyfunc, 0);
 	mlx_string_put(data.mlx_connect, data.mlx_window, 1800 * 0.8, 1000 * 0.95, 0xFF0000, "first test");
 	mlx_loop(data.mlx_connect);
-	mlx_destroy_image(data.mlx_connect, data.img.img_ptr);
-	mlx_destroy_display(data.mlx_connect);
-	free(data.mlx_connect);
-	ft_lstclear_s(&pix);
+	destroy_fct(&data);
 	return (0);
 }

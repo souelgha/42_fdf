@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/27 11:40:33 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:17:47 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ t_pix	*newpix(int	i, int j, char *pixel)
 	data = ft_split(pixel, ',');
 	new_node->height = ft_atoi(data[0]);
 	new_node->color = ft_atoi_hexa(data[1]);
-	new_node->x_pix = 0;
-	new_node->y_pix = 0;
+	new_node->x_pix = i * 50;
+	new_node->y_pix = j * 50;
+	new_node->line_down = NULL;
+	new_node->line_right = NULL;
 	new_node->next = NULL;	
 	get_free(data);
 	return (new_node);	
@@ -96,8 +98,43 @@ void	affiche_list(t_pix *map)
 	ptr = map;
 	while(ptr)
 	{
-		printf("x_map(%d)\ty_map(%d)\theight(%d)\tcolor(%ld)\tx_pix(%d)\ty_pix(%d)\n", 
-					ptr->x_map, ptr->y_map, ptr->height, ptr->color, ptr->x_pix, ptr->y_pix);
+		printf("ptr<%p>\tx_map(%d)\ty_map(%d)\theight(%d)\t"
+			"color(%ld)\tx_p(%d)\ty_p(%d)\tnext<%p>\t"
+			"down<%p>\tright<%p>\n", 
+					ptr, ptr->x_map, ptr->y_map, ptr->height, 
+					ptr->color, ptr->x_pix, ptr->y_pix, ptr->next,
+					ptr->line_down, ptr->line_right);
 		ptr = ptr->next;
+	}
+}
+
+void connect_right(t_pix *head)
+{
+	t_pix *ptr;
+
+	ptr = head;
+	while (ptr->next != NULL)
+	{
+		if (ptr->next->y_map == ptr->y_map)
+			ptr->line_right = ptr->next;
+		ptr = ptr->next;
+	}
+}
+void connect_down(t_pix *head)
+{
+	t_pix *ptr;
+	t_pix *current;
+
+	current = head;
+	while (current->next != NULL)
+	{
+		ptr = current->next;
+		while (ptr != NULL)
+		{
+			if (ptr->x_map == current->x_map)
+				current->line_down = ptr;
+			ptr= ptr->next;
+		}
+		current = current->next;
 	}
 }

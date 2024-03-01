@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:09 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/23 16:31:57 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:55:57 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,56 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)pixel = color;
 }
 
-int render_rect(t_img *img, t_rect rect)
+/*int render(t_data *data, t_rect rect)
 {
     int	i;
     int j;
-
+	if (data->mlx_window == NULL)
+        return (1);
     i = rect.y;
+	rect.height = WINY * 0.5;
+	rect.width = WINX * 0.5;
+	rect.color = 0xFFFF00;
+	rect.x = 0;
+	rect.y = 0;
     while (i < rect.y + rect.height)
     {
         j = rect.x;
         while (j < rect.x + rect.width)
-            my_pixel_put(img, j++, i, rect.color);
+            my_pixel_put(&data->img, j++, i, rect.color);
         ++i;
     }
+	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, 
+							data->img.img_ptr, WINX / 4, WINY / 4);//centre l'image
     return (0);
-}
-
-int	render(t_data *data)
-{
-    if (data->mlx_window == NULL)
-        return (1);
-    render_rect(&data->img, (t_rect){0, 0, 100, 100, 0xFF0000});
-    mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, 0, 0);
-	return (0);
-}
+}*/
 
  int code_rgb(int red, int green, int blue)
 {
  	return (red << 16 | green << 8 | blue);
 }
+
+/*int putline(t_data *data, t_pix *point)
+{
+    int	i;
+    int j;
+//	t_pix *ptr;
+
+//	ptr = *point;
+	if (data->mlx_window == NULL)
+        return (1);
+    i = point->x_map;
+	point->x_pix = 50; //offset de 50 pixels
+
+	point->color = 0xFFFF00;	
+    while (i < rect.height)
+    {
+        j = point->color;
+        while (j < (WINX / 2))
+            my_pixel_put(&data->img, j++, i, point->color);
+        ++i;
+    }
+	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, 
+							data->img.img_ptr, WINX / 4, WINY / 4);//centre l'image
+    return (0);
+}*/

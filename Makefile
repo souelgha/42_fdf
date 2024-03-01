@@ -22,7 +22,9 @@ SRC =  	fdf.c\
 		utils_hooks.c\
 		check_functions.c\
 		parsing_file.c\
-		lst_utils.c
+		lst_utils.c\
+		algo_line.c\
+		utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

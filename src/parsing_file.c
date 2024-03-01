@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:20:21 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/27 11:30:12 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:51:42 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ int	pars_file(char *file, t_pix **map) //argv[1] & list
 	char 	**pixel;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return(1);
-	printf("fd = %d\n", fd);
 	i = 0;
 	j = 0;
 	next_line = get_next_line(fd);
