@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/01 17:32:16 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/04 16:39:27 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 
 # define WINX 1920	
 # define WINY 1080
-# define IMGX 900	
-# define IMGY 500
+# define IMGX 1000	
+# define IMGY 800
+
 
 typedef struct s_img
 {
@@ -103,6 +104,7 @@ void	affiche_list(t_pix *map);
 void 	connect_right(t_pix *head);
 void 	connect_down(t_pix *head);
 void 	file_colums_rows(t_data *data);
+void	img_centering(t_data *data);
 void	destroy_fct(t_data *data);
 
 

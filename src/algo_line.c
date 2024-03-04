@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:56:30 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/01 18:10:44 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/04 16:21:19 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int render(t_data *data)
 		return (1);
 	draw_lines(data, &data->node);
 	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, WINX / 4, WINY / 4);
+	//mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, data->x_startimg, data->y_startimg);
 	return (0);
 }
