@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/04 16:29:33 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:37:50 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int main(int argc, char **argv)
 	connect_right(data.node);
 	connect_down(data.node);
 	printf("\n");	
-	affiche_list(data.node);
-	file_colums_rows(&data);
+//	affiche_list(data.node);
+	file_colums_rows(&data, data.node);
+	//file_colums_rows(&data);
 	img_centering(&data);
 	affiche_list(data.node);
 	config_win_img(&data);

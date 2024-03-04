@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/04 16:39:27 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:06:45 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define WINY 1080
 # define IMGX 1000	
 # define IMGY 800
+# define TETA 0.5236 //30degres
 
 
 typedef struct s_img
@@ -60,6 +61,8 @@ typedef struct s_pix
 	unsigned long	color;
 	int				x_pix;
 	int				y_pix;
+	int				x_adjust;
+	int				y_adjust;
 	struct s_pix	*next;
 	struct s_pix	*line_down;	// lien vers le bas
 	struct s_pix	*line_right; // lien vers la droite 
@@ -103,7 +106,8 @@ void	ft_lstadd_back_s(t_pix **lst, t_pix *new_node);
 void	affiche_list(t_pix *map);
 void 	connect_right(t_pix *head);
 void 	connect_down(t_pix *head);
-void 	file_colums_rows(t_data *data);
+//void 	file_colums_rows(t_data *data);
+void 	file_colums_rows(t_data *data, t_pix *pix);
 void	img_centering(t_data *data);
 void	destroy_fct(t_data *data);
 

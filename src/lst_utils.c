@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/01 12:17:47 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/04 17:16:12 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ t_pix	*newpix(int	i, int j, char *pixel)
 	data = ft_split(pixel, ',');
 	new_node->height = ft_atoi(data[0]);
 	new_node->color = ft_atoi_hexa(data[1]);
-	new_node->x_pix = i * 50;
-	new_node->y_pix = j * 50;
+	new_node->x_pix = i * 30;
+	new_node->y_pix = j * 30;
 	new_node->line_down = NULL;
 	new_node->line_right = NULL;
 	new_node->next = NULL;	

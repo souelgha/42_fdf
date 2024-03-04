@@ -15,7 +15,7 @@ HEADER_FOLDER = includes
 #LIBX_PATH = minilibx-linux
 #LIBX_MAKE = Makefile
 #LIBX = $(LIBX_PATH)/libmlx.a
-ARGS = 2lines.fdf
+ARGS = 42.fdf
 
 #SOURCES
 SRC =  	fdf.c\
@@ -24,7 +24,8 @@ SRC =  	fdf.c\
 		parsing_file.c\
 		lst_utils.c\
 		algo_line.c\
-		utils.c
+		utils.c\
+		calcul_angles.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

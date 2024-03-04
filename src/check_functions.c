@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:43:24 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/04 16:28:49 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:39:43 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,25 @@ int check_arg(int argc, char **argv)
 	return (1);
 }
 
-/** nombre le lignes et colonnes dans le fichier*/
-void file_colums_rows(t_data *data) 
+/** nombre le lignes et colonnes dans le fichier.. a rechecker*/
+void file_colums_rows(t_data *data, t_pix *lst) 
 {
 	t_pix *ptr;
 	int 	i;
 	int		j;
 	
-	ptr = data->node;
+	ptr = lst;
 	i = 0;
 	j = 0;
-	while (ptr->y_map == 0)
+	while (ptr->line_right != NULL)
 	{
-		ptr = ptr->next;
 		i++;
+	//	printf("i=%d\tptr<%p>\n", i, ptr);
+		ptr = ptr->line_right;
 	}
 	data->x_colunms = i;
 	printf("colunms= %d\t", data->x_colunms);
-	ptr = data->node;
+	ptr = lst;
 	while (ptr)
 	{
 		if(ptr->y_map == (j + 1))
@@ -58,7 +59,7 @@ void file_colums_rows(t_data *data)
 		ptr = ptr->next;
 	}
 	data->y_row = j + 1;
-	printf("rows= %d\t", data->y_row);
+	printf("rows= %d\t\n", data->y_row);
 }
 
 void	img_centering(t_data *data)
@@ -68,11 +69,11 @@ void	img_centering(t_data *data)
 
 	current = data->node;
 	if (data->x_colunms > data->y_row)
-		delta = (IMGX ) / (data->x_colunms);
+		delta = (IMGX * 0.6 ) / (data->x_colunms);
 	else
-		delta = (IMGY ) / (data-> y_row); 
+		delta = (IMGY * 0.6) / (data-> y_row); 
 	
-	printf("delta= %d\t", delta);
+	printf("delta= %d\n", delta);
 	while (current)
 	{
 		current->x_pix = current->x_map * (delta);
