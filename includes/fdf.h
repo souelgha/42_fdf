@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/04 18:06:45 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:35:09 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WINY 1080
 # define IMGX 1000	
 # define IMGY 800
-# define TETA 0.5236 //30degres
+# define TETA 0.3236 //30degres
 
 
 typedef struct s_img
@@ -75,6 +75,8 @@ typedef struct	s_data
 	void	*mlx_window;
 	int		x_colunms;
 	int		y_row;
+	int		xtot_hypo;
+	int		ytot_hypo;
 	t_img	img;
 	t_pix	*node;
 }	t_data;
@@ -109,6 +111,9 @@ void 	connect_down(t_pix *head);
 //void 	file_colums_rows(t_data *data);
 void 	file_colums_rows(t_data *data, t_pix *pix);
 void	img_centering(t_data *data);
+void	hypo_total(t_data *data);
+void	adj_coord(t_data *data, t_pix **head);
+
 void	destroy_fct(t_data *data);
 
 

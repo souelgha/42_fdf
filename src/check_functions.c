@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:43:24 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/04 17:39:43 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:06:37 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void file_colums_rows(t_data *data, t_pix *lst)
 			j++;
 		ptr = ptr->next;
 	}
-	data->y_row = j + 1;
+	data->y_row = j;
 	printf("rows= %d\t\n", data->y_row);
 }
 
@@ -69,9 +69,9 @@ void	img_centering(t_data *data)
 
 	current = data->node;
 	if (data->x_colunms > data->y_row)
-		delta = (IMGX * 0.6 ) / (data->x_colunms);
+		delta = (IMGX * 0.5) / (data->x_colunms);
 	else
-		delta = (IMGY * 0.6) / (data-> y_row); 
+		delta = (IMGY * 0.5) / (data-> y_row); 
 	
 	printf("delta= %d\n", delta);
 	while (current)

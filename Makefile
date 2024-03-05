@@ -11,10 +11,6 @@ SRC_PATH = src/
 OBJ_PATH = obj/
 HEADER_FOLDER = includes
 
-#MINILIBX
-#LIBX_PATH = minilibx-linux
-#LIBX_MAKE = Makefile
-#LIBX = $(LIBX_PATH)/libmlx.a
 ARGS = 42.fdf
 
 #SOURCES
@@ -36,7 +32,7 @@ INCS	= -I ./includes/
 all: $(NAME) 
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ libmlx.a libft.a $(CLIBX)
+	$(CC) $(CFLAGS) $(OBJS) -o $@ libmlx.a libft.a $(CLIBX) -lm
 	@echo "$(GREEN) compilation ok $(RESET)"
 
 #OBJECTS

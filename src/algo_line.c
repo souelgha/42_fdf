@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:56:30 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/04 16:50:06 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:47:11 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	bres_y(t_data *data, t_pix *start, t_pix *end)
 	int dy;
 	int dx;
 
-	x = start->x_pix;
-	y = start->y_pix;
-	dx =  end->x_pix - start->x_pix;
-	dy =  end->y_pix - start->y_pix;
+	x = start->x_adjust;
+	y = start->y_adjust;
+	dx =  end->x_adjust - start->x_adjust;
+	dy =  end->y_adjust - start->y_adjust;
 	p = 2 * dx - dy;
-	while (y != end->y_pix)
+	while (y != end->y_adjust)
 	{
 		my_pixel_put(&data->img, x, y, 0xFFFFFF);
 		y++;
@@ -46,12 +46,12 @@ static void	bres_x(t_data *data, t_pix *start, t_pix *end)
 	int dy;
 	int dx;
 
-	x = start->x_pix;
-	y = start->y_pix;
-	dx =  end->x_pix - start->x_pix;
-	dy =  end->y_pix - start->y_pix;
+	x = start->x_adjust;
+	y = start->y_adjust;
+	dx =  end->x_adjust - start->x_adjust;
+	dy =  end->y_adjust - start->y_adjust;
 	p = 2 * dy - dx;
-	while (x != end->x_pix)
+	while (x != end->x_adjust)
 	{
 		my_pixel_put(&data->img, x, y, 0xFFFFFF);
 		x++;
@@ -64,18 +64,19 @@ static void	bres_x(t_data *data, t_pix *start, t_pix *end)
 		}
 	}
 }
+
 void	bresenham(t_data *data, t_pix *start, t_pix *end)
 {
 	int	delta_x;
 	int	delta_y;
 
-	delta_x = abs(end->x_pix - start->x_pix);
-	delta_y = abs(end->y_pix - start->y_pix);
+	delta_x = abs(end->x_adjust - start->x_adjust);
+	delta_y = abs(end->y_adjust - start->y_adjust);
 	if (delta_x >= delta_y)
 		bres_x(data, start, end);
 	else
 		bres_y(data, start, end);
-	my_pixel_put(&data->img, end->x_pix, end->y_pix, 0xFF0000);
+	my_pixel_put(&data->img, end->x_adjust, end->y_adjust, 0xFF0000);
 }
 void	draw_lines(t_data *data, t_pix **head)
 {
@@ -100,3 +101,16 @@ int render(t_data *data)
 	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, WINX / 4, WINY / 4);
 	return (0);
 }
+// void	bresenham(t_data *data, t_pix *start, t_pix *end)
+// {
+// 	int	delta_x;
+// 	int	delta_y;
+
+// 	delta_x = abs(end->x_pix - start->x_pix);
+// 	delta_y = abs(end->y_pix - start->y_pix);
+// 	if (delta_x >= delta_y)
+// 		bres_x(data, start, end);
+// 	else
+// 		bres_y(data, start, end);
+// 	my_pixel_put(&data->img, end->x_pix, end->y_pix, 0xFF0000);
+// }

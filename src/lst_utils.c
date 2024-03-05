@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/04 17:16:12 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:23:31 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_pix	*newpix(int	i, int j, char *pixel)
 	new_node->color = ft_atoi_hexa(data[1]);
 	new_node->x_pix = i * 30;
 	new_node->y_pix = j * 30;
+	new_node->x_adjust = 0;
+	new_node->y_adjust = 0;
 	new_node->line_down = NULL;
 	new_node->line_right = NULL;
 	new_node->next = NULL;	
@@ -98,12 +100,18 @@ void	affiche_list(t_pix *map)
 	ptr = map;
 	while(ptr)
 	{
-		printf("ptr<%p>\tx_map(%d)\ty_map(%d)\theight(%d)\t"
-			"color(%ld)\tx_p(%d)\ty_p(%d)\tnext<%p>\t"
+		// printf("ptr<%p>\tx_map(%d)\ty_map(%d)\theight(%d)\t"
+		// 	"color(%ld)\tx_p(%d)\ty_p(%d)\tnext<%p>\t"
+		// 	"down<%p>\tright<%p>\n", 
+		// 			ptr, ptr->x_map, ptr->y_map, ptr->height, 
+		// 			ptr->color, ptr->x_pix, ptr->y_pix, ptr->next,
+		// 			ptr->line_down, ptr->line_right);
+		printf("ptr<%p>\tx_map(%d)\ty_map(%d)\t"
+			"x_p(%d)\ty_p(%d)\tx_ad(%d)\ty_ad(%d)\tnext<%p>\t"
 			"down<%p>\tright<%p>\n", 
-					ptr, ptr->x_map, ptr->y_map, ptr->height, 
-					ptr->color, ptr->x_pix, ptr->y_pix, ptr->next,
-					ptr->line_down, ptr->line_right);
+					ptr, ptr->x_map, ptr->y_map, 
+					ptr->x_pix, ptr->y_pix, ptr->x_adjust, ptr->y_adjust,
+					ptr->next, ptr->line_down, ptr->line_right);
 		ptr = ptr->next;
 	}
 }
