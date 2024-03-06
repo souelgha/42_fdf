@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/06 11:36:58 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:29:36 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WINY 1080
 # define IMGX 1000	
 # define IMGY 800
-# define TETA 0.4036 //30degres
+# define TETA 0.636 //30degres
 
 
 typedef struct s_img
@@ -41,16 +41,6 @@ typedef struct s_img
 	int		endian; // type d endian
 }	t_img;
 
-
-
-typedef struct s_rect
-{
-    int	x;
-    int	y;
-    int width;
-    int height;
-    int color;
-}	t_rect;
 
 /*** structure du point dans la map ***/
 typedef struct s_pix
@@ -77,6 +67,8 @@ typedef struct	s_data
 	int		y_row;
 	int		xtot_hypo;
 	int		ytot_hypo;
+//	int		dx;
+//	int		dy;
 	int		shift;
 	t_img	img;
 	t_pix	*node;

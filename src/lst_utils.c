@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/05 14:23:31 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:35:23 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_lstadd_back_s(t_pix **lst, t_pix *new_node)
 		ptr->next = new_node;
 	}
 }
+
 void get_free(char **tab)
 {
 	int i;
@@ -128,21 +129,22 @@ void connect_right(t_pix *head)
 		ptr = ptr->next;
 	}
 }
+
 void connect_down(t_pix *head)
 {
 	t_pix *ptr;
 	t_pix *current;
 
 	current = head;
-	while (current->next != NULL)
+	ptr = head;	
+	while (ptr->line_right)
+		ptr = ptr->next;
+	ptr = ptr->next; //debut de la 2e ligne
+	while (ptr)
 	{
-		ptr = current->next;
-		while (ptr != NULL)
-		{
-			if (ptr->x_map == current->x_map)
-				current->line_down = ptr;
-			ptr= ptr->next;
-		}
+		if (ptr->x_map == current->x_map)
+			current->line_down = ptr;
 		current = current->next;
+		ptr = ptr->next;
 	}
 }

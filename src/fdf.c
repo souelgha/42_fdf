@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/05 15:14:37 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:36:50 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int main(int argc, char **argv)
 	img_centering(&data);
 	hypo_total(&data);
 	adj_coord(&data, &data.node);
-	affiche_list(data.node);
+//	affiche_list(data.node);
 	config_win_img(&data);
 	mlx_loop_hook(data.mlx_connect, render, &data);	
 	//printf("line_len=%d\nbpp=%d\nendian=%d\n", data.img.line_len, data.img.bpp, data.img.endian);
 	mlx_hook(data.mlx_window, 17, 1L<<5, close_win, &data);
 	mlx_hook(data.mlx_window, KeyPress, KeyPressMask, handle_keypress, &data);
 	mlx_key_hook(data.mlx_window, keyfunc, 0);
-	mlx_string_put(data.mlx_connect, data.mlx_window, 1800 * 0.8, 1000 * 0.95, 0xFF0000, "first test");
+	mlx_string_put(data.mlx_connect, data.mlx_window, 1900 * 0.95, 1000 * 0.95, 0xFF0000, "first test");
 	mlx_loop(data.mlx_connect);
 	destroy_fct(&data);
 	return (0);
