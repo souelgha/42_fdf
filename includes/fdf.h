@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/05 16:35:09 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:36:58 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WINY 1080
 # define IMGX 1000	
 # define IMGY 800
-# define TETA 0.3236 //30degres
+# define TETA 0.4036 //30degres
 
 
 typedef struct s_img
@@ -77,6 +77,7 @@ typedef struct	s_data
 	int		y_row;
 	int		xtot_hypo;
 	int		ytot_hypo;
+	int		shift;
 	t_img	img;
 	t_pix	*node;
 }	t_data;

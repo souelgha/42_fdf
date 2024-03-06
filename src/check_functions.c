@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:43:24 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/05 14:06:37 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:33:25 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ void	img_centering(t_data *data)
 		delta = (IMGX * 0.5) / (data->x_colunms);
 	else
 		delta = (IMGY * 0.5) / (data-> y_row); 
-	
-	printf("delta= %d\n", delta);
+	data->shift = delta;
+	printf("shift= %d\n", data->shift);
 	while (current)
 	{
 		current->x_pix = current->x_map * (delta);
 		current->y_pix = current->y_map * (delta);
 		current = current->next;
 	}
+	//data->delta = delta;
 
 }
