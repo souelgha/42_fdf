@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:11:00 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/01/30 14:59:50 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:40:15 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE _H 
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 20000
 # endif
 
 # include <unistd.h>

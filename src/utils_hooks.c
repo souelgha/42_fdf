@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:09 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/28 16:55:57 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/07 15:17:38 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,12 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
+	if ( x < 0 || x >= IMGX || y < 0 || y >= IMGY)
+		return;
 	pixel = img->addr_pix + (img->line_len * y) + ( x * (img->bpp / 8));
 	*(unsigned int *)pixel = color;
 }
 
-/*int render(t_data *data, t_rect rect)
-{
-    int	i;
-    int j;
-	if (data->mlx_window == NULL)
-        return (1);
-    i = rect.y;
-	rect.height = WINY * 0.5;
-	rect.width = WINX * 0.5;
-	rect.color = 0xFFFF00;
-	rect.x = 0;
-	rect.y = 0;
-    while (i < rect.y + rect.height)
-    {
-        j = rect.x;
-        while (j < rect.x + rect.width)
-            my_pixel_put(&data->img, j++, i, rect.color);
-        ++i;
-    }
-	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, 
-							data->img.img_ptr, WINX / 4, WINY / 4);//centre l'image
-    return (0);
-}*/
 
  int code_rgb(int red, int green, int blue)
 {

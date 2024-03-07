@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:14:32 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/06 11:58:41 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:55:52 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	config_win_img(t_data *data)
 		free(data->mlx_window);
 		return (1);
 	}	
-	data->img.img_ptr =  mlx_new_image(data->mlx_connect, WINX * 0.8, WINY * 0.8);
+	data->img.img_ptr =  mlx_new_image(data->mlx_connect, IMGX, IMGY);
 	data->img.addr_pix = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp, &data->img.line_len, &data->img.endian);
 	return (0);
 }
