@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:54:29 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/07 18:11:10 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:57:12 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@
 
 void	img_centering(t_data *data)
 {
-	int	delta;  //ecart entre 2 points en pixels.
 	int	dx;
 	int	dy;
 	t_pix	*current;
 
 	current = data->node;
-	// dx = (IMGX*0.8) / (data->x_colunms);
-	// dy = (IMGY*0.8) / (data-> y_row); 
-	dx = (IMGX*0.8) / (data->x_colunms + data->y_row * tan(ALPHA));
-	dy = (IMGY*0.8) / (data->y_row + data->x_colunms * tan(TETA)); 
-	if (dx <= dy)
-		delta = dx;
+	dx = (IMGX * 0.8) / (data->x_colunms * 2 );
+	dy = (IMGY * 0.8) / (data->y_row * 2); 
+	if (data->x_colunms > 200 || data->y_row > 200)
+		data->shift = 1;
+	else if (dx <= dy && data->x_colunms < 200 )
+		data->shift = dx;
 	else
-		delta = dy;
-	data->shift = delta;
+		data->shift = dy;
 	ft_printf("dx=%d\tdy=%d\tshift= %d\n", dx, dy, data->shift);
 	while (current)
 	{
-		current->x_pix = current->x_map * (delta);
-		current->y_pix = current->y_map * (delta);
+		current->x_pix = current->x_map * (data->shift);
+		current->y_pix = current->y_map * (data->shift);
 		current = current->next;
 	}
 }
@@ -47,8 +45,8 @@ void	perimetre_total(t_data *data)
 	current = data->node;
 	while (current->next != NULL)
 		current = current->next;
-	data->xtot_hypo = data->shift * (data->x_colunms + data->y_row * tan(ALPHA));
-	data->ytot_hypo = data->shift * (data->y_row + data->x_colunms * tan(TETA));
+	data->xtot_hypo = data->shift * (data->x_colunms * 2);
+	data->ytot_hypo = data->shift * (data->y_row  * 2);
 	ft_printf("hx=%d\t", data->xtot_hypo);
 	ft_printf("hy=%d\n", data->ytot_hypo);
 }
@@ -60,9 +58,11 @@ void	adj_coord(t_data *data, t_pix **head)
 	int		x_orig;
 
 	current = *head;
-	//x_orig = data->ytot_hypo + 5;
-	//x_orig = WINX/4;
-	x_orig = data->y_row * tan(ALPHA) * data->shift + 200;
+	if (data->shift == 2)
+		x_orig = WINX/2;
+	else 
+		x_orig = data->y_row / tan(TETA) * data->shift + 50;
+	ft_printf("x_orig=%d\n", x_orig);
 	while (current)
 	{
 		while (current->line_right)
@@ -77,8 +77,8 @@ void	adj_coord(t_data *data, t_pix **head)
 			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);		
 			current = current->next;			
 		}
-		x_orig = x_orig - data->shift * tan(ALPHA);
-		if (current) // 2e line
+		x_orig = x_orig - data->shift;
+		if (current)
 		{
 			current->x_adjust = x_orig;
 			current->y_adjust = current->y_pix;

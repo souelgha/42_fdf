@@ -20,7 +20,7 @@ SRC =  	fdf.c\
 		parsing_file.c\
 		lst_utils.c\
 		algo_line.c\
-		utils.c\
+		utils_mlx.c\
 		calcul_angles.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))

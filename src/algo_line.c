@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:56:30 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/07 17:50:44 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:49:27 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void	bres_y(t_data *data, t_pix *start, t_pix *end)
 	p = 2 * data->dx - data->dy;
 	signx = signstep(start->x_adjust, end->x_adjust);
 	signy = signstep(start->y_adjust, end->y_adjust);
-	while (y <= end->y_adjust)
+	while (y < end->y_adjust)
 	{
-		my_pixel_put(&data->img, x, y, 0xFFFFFF);
+		my_pixel_put(&data->img, x, y, 0xFF00FF);
 		y+=signy;
 		if (p < 0)
 		 	p = p + (2 * data->dx);
@@ -46,24 +46,21 @@ static void	bres_y(t_data *data, t_pix *start, t_pix *end)
 		}
 	}
 }
-
-static void	bres_x(t_data *data, t_pix *start, t_pix *end)
+static void	bres_xneg(t_data *data, t_pix *start, t_pix *end)
 {
 	int x;
 	int	y;
 	int p;
-	int signx;
 	int signy;
 
 	x = start->x_adjust;
 	y = start->y_adjust;
 	p = 2 * data->dy - data->dx;
-	signx = signstep(start->x_adjust, end->x_adjust);
 	signy = signstep(start->y_adjust, end->y_adjust);
-	while (x <= end->x_adjust)
+	while (x > end->x_adjust)
 	{
-		my_pixel_put(&data->img, x, y, 0xFFFFFF);
-		x += signx;
+		my_pixel_put(&data->img, x, y, 16776960);
+		x--;
 		if (p < 0)
 			p = p + (2 * data->dy);
 		else 
@@ -72,6 +69,45 @@ static void	bres_x(t_data *data, t_pix *start, t_pix *end)
 			y+=signy;
 		}
 	}
+}
+
+static void	bres_xpos(t_data *data, t_pix *start, t_pix *end)
+{
+	int x;
+	int	y;
+	int p;
+	int signy;
+
+	x = start->x_adjust;
+	y = start->y_adjust;
+	p = 2 * data->dy - data->dx;
+	signy = signstep(start->y_adjust, end->y_adjust);
+	while (x < end->x_adjust)
+	{
+		my_pixel_put(&data->img, x, y, 0xFF00FF);
+		x++;
+		if (p < 0)
+			p = p + (2 * data->dy);
+		else 
+		{
+			p = p + (2 * data->dy) - (2 * data->dx);
+			y+=signy;
+		}
+	}
+}
+
+static void	bres_x(t_data *data, t_pix *start, t_pix *end)
+{
+
+	int signx;
+	int signy;
+
+	signx = signstep(start->x_adjust, end->x_adjust);
+	signy = signstep(start->y_adjust, end->y_adjust);
+	if (signx == 1)
+		bres_xpos(data, start, end);
+	else
+		bres_xneg(data, start, end);
 }
 
 void	bresenham(t_data *data, t_pix *start, t_pix *end)
@@ -87,7 +123,7 @@ void	bresenham(t_data *data, t_pix *start, t_pix *end)
 		bres_x(data, start, end);
 	else
 		bres_y(data, start, end);
-	//my_pixel_put(&data->img, end->x_adjust, end->y_adjust, 0xFF0000);
+	my_pixel_put(&data->img, end->x_adjust, end->y_adjust, end->color);
 }
 void	draw_lines(t_data *data, t_pix **head)
 {
@@ -103,25 +139,25 @@ void	draw_lines(t_data *data, t_pix **head)
 		current = current->next;
 	}
 }
-/*static void	points(t_data *data)
+void	points(t_data *data)
 {
 	t_pix *current;
 
 	current = data->node;
 	while (current)
 	{
-		my_pixel_put(&data->img, (current->x_adjust)/1, (current->y_adjust)/1, 0xFFFFFF);
+		my_pixel_put(&data->img, current->x_adjust, current->y_adjust, current->color);
 		current = current->next;
 	}
-}*/
+}
 
 int render(t_data *data)
 {
 	if (data->mlx_window == NULL)
 		return (1);
-	draw_lines(data, &data->node);
-//	points(data);
-	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, 0, 0);
+	points(data);
+//	draw_lines(data, &data->node);
+	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, 0, 50);
 	return (0);
 }
 

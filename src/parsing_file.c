@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:20:21 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/01 13:51:42 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/11 15:58:07 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	pars_file(char *file, t_pix **map) //argv[1] & list
 	free(next_line);
     return (0);
 }
+/*** renvoie le code couleur du banc si pas de donnees de color ***/
 unsigned long	ft_atoi_hexa(const char *str)
 {
 	const char		*hex;
@@ -51,11 +52,12 @@ unsigned long	ft_atoi_hexa(const char *str)
 	hex = "0123456789ABCDEF";
 	result = 0;	
 	if (!str)
-		return (0);
+		return (16777215);
 	i = 2;
 	while (str[i] != '\0' && str[i] != '\n')
 	{
-		ptr = ft_strchr(hex, str[i]);
+		
+		ptr = ft_strchr(hex, ft_toupper(str[i]));
 		if (ptr == NULL)
 			break ;
 		result = result * 16 + (ptr - hex);
