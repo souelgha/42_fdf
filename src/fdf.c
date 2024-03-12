@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/11 15:29:31 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:37:48 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	img_centering(&data);
 	perimetre_total(&data);
 	adj_coord(&data, &data.node);
-//	affiche_list(data.node);
+	affiche_list(data.node);
 	config_win_img(&data);
 	mlx_loop_hook(data.mlx_connect, render, &data);	
 	//printf("line_len=%d\nbpp=%d\nendian=%d\n", data.img.line_len, data.img.bpp, data.img.endian);

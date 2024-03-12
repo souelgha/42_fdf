@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/11 14:07:50 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:39:13 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_pix	*newpix(int i, int j, char *pixel)
 	new_node->x_map = i;
 	new_node->y_map = j;
 	data = ft_split(pixel, ',');
-	new_node->height = ft_atoi(data[0]);
+	new_node->z_map = ft_atoi(data[0]);
 	new_node->color = ft_atoi_hexa(data[1]);
 	new_node->x_pix = i * 10;
 	new_node->y_pix = j * 10;
@@ -102,10 +102,10 @@ void	affiche_list(t_pix *map)
 	ptr = map;
 	while (ptr)
 	{
-		ft_printf("ptr<%p>\tx_map(%d)\ty_map(%d)\t col(%d)\t"
-			"x_p(%d)\ty_p(%d)\tx_ad(%d)\ty_ad(%d)\nnext<%p>\t"
+		ft_printf("ptr<%p>\tx_map(%d)\ty_map(%d)\tz_map(%d)\tcol(%d)\t"
+			"x_p(%d)\ty_p(%d)\tx_ad(%d)\ty_ad(%d)\t\nnext<%p>\t"
 			"down<%p>\tright<%p>\n", 
-					ptr, ptr->x_map, ptr->y_map,ptr->color,
+					ptr, ptr->x_map, ptr->y_map, ptr->z_map, ptr->color,
 					ptr->x_pix, ptr->y_pix, ptr->x_adjust, ptr->y_adjust,
 					ptr->next, ptr->line_down, ptr->line_right);
 		ptr = ptr->next;

@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:54:29 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/11 15:57:12 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:38:36 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	img_centering(t_data *data)
 	dy = (IMGY * 0.8) / (data->y_row * 2); 
 	if (data->x_colunms > 200 || data->y_row > 200)
 		data->shift = 1;
+	else if (dx > 30 || dy > 30)
+		data->shift = 20;
 	else if (dx <= dy && data->x_colunms < 200 )
 		data->shift = dx;
 	else
@@ -56,33 +58,81 @@ void	adj_coord(t_data *data, t_pix **head)
 {
 	t_pix	*current;
 	int		x_orig;
+	int		y_orig;
 
 	current = *head;
-	if (data->shift == 2)
-		x_orig = WINX/2;
-	else 
-		x_orig = data->y_row / tan(TETA) * data->shift + 50;
-	ft_printf("x_orig=%d\n", x_orig);
+	// if (data->shift == 1)
+	// {
+	// 	x_orig = WINX/2;
+	// 	y_orig = WINY/3;
+	// }
+	// else 
+	// {
+		x_orig = WINX/2 - data->shift * data->x_colunms;
+		y_orig = WINY/2 - data->shift * data->y_row;
+	// }
+	ft_printf("x_orig=%d\ty_orig=%d\n", x_orig, y_orig);
 	while (current)
 	{
-		while (current->line_right)
+		while (current)
 		{
-			current->x_adjust = current->x_pix + x_orig;
-			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);
-			current = current->next;
-		}
-		if (current)
-		{
-			current->x_adjust = current->x_pix + x_orig;
-			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);		
-			current = current->next;			
-		}
-		x_orig = x_orig - data->shift;
-		if (current)
-		{
-			current->x_adjust = x_orig;
-			current->y_adjust = current->y_pix;
+			current->x_adjust = x_orig + (current->x_pix - current->y_pix) * cos(TETA) ;
+			current->y_adjust = y_orig + (current->y_pix + current->x_pix) * sin(TETA) -(current->z_map * data->shift * sin(TETA));
 			current = current->next;
 		}
 	}
 }
+// void	isometric(t_dot *dot, double angle)
+// {
+// 	dot->x = (dot->x - dot->y) * cos(angle);
+// 	dot->y = (dot->x + dot->y) * sin(angle) - dot->z;
+// }
+// void	int_to_isometric_pixel(t_date *info, t_point **head)
+// {
+// 	t_point	*current;
+
+// 	current = *head;
+// 	while (current != NULL)
+// 	{
+// 		current->x_pixel = (info->center_x) + ((current->x_map - current->y_map)
+// 				* cos(PI / 6) * info->scaling);
+// 		current->y_pixel = (info->center_y) - (current->z_map * sin(PI / 6)
+// 				* info->scaling) + ((current->x_map + current->y_map)
+// 				* sin(PI / 6) * info->scaling);
+// 		current = current->next;
+// 	}
+//}
+// void	adj_coord(t_data *data, t_pix **head)
+// {
+// 	t_pix	*current;
+// 	int		x_orig;
+
+// 	current = *head;
+// 	if (data->shift == 2)
+// 		x_orig = WINX/2;
+// 	else 
+// 		x_orig = data->y_row / tan(TETA) * data->shift + 50;
+// 	ft_printf("x_orig=%d\n", x_orig);
+// 	while (current)
+// 	{
+// 		while (current->line_right)
+// 		{
+// 			current->x_adjust = current->x_pix + x_orig;
+// 			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);
+// 			current = current->next;
+// 		}
+// 		if (current)
+// 		{
+// 			current->x_adjust = current->x_pix + x_orig;
+// 			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);		
+// 			current = current->next;			
+// 		}
+// 		x_orig = x_orig - data->shift;
+// 		if (current)
+// 		{
+// 			current->x_adjust = x_orig;
+// 			current->y_adjust = current->y_pix;
+// 			current = current->next;
+// 		}
+// 	}
+// }

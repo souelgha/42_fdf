@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/11 16:00:57 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:41:49 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define IMGX 1920	
 # define IMGY 1080
 # define TETA 0.5236 //sur x
-# define ALPHA 1.0472 //sur y
 
 
 typedef struct s_img
@@ -48,7 +47,7 @@ typedef struct s_pix
 {
 	int				x_map;
 	int				y_map;
-	int				height;
+	int				z_map;
 	unsigned long	color;
 	int				x_pix;
 	int				y_pix;

@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:56:30 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/11 14:49:27 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:13:22 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	bres_y(t_data *data, t_pix *start, t_pix *end)
 	signy = signstep(start->y_adjust, end->y_adjust);
 	while (y < end->y_adjust)
 	{
-		my_pixel_put(&data->img, x, y, 0xFF00FF);
+		my_pixel_put(&data->img, x, y, start->color);
 		y+=signy;
 		if (p < 0)
 		 	p = p + (2 * data->dx);
@@ -59,7 +59,7 @@ static void	bres_xneg(t_data *data, t_pix *start, t_pix *end)
 	signy = signstep(start->y_adjust, end->y_adjust);
 	while (x > end->x_adjust)
 	{
-		my_pixel_put(&data->img, x, y, 16776960);
+		my_pixel_put(&data->img, x, y, start->color);
 		x--;
 		if (p < 0)
 			p = p + (2 * data->dy);
@@ -84,7 +84,7 @@ static void	bres_xpos(t_data *data, t_pix *start, t_pix *end)
 	signy = signstep(start->y_adjust, end->y_adjust);
 	while (x < end->x_adjust)
 	{
-		my_pixel_put(&data->img, x, y, 0xFF00FF);
+		my_pixel_put(&data->img, x, y, start->color);
 		x++;
 		if (p < 0)
 			p = p + (2 * data->dy);
@@ -155,8 +155,8 @@ int render(t_data *data)
 {
 	if (data->mlx_window == NULL)
 		return (1);
-	points(data);
-//	draw_lines(data, &data->node);
+//	points(data);
+	draw_lines(data, &data->node);
 	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, 0, 50);
 	return (0);
 }
