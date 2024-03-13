@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:56:30 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/12 17:13:22 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:52:08 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int signstep(int start, int end)
 	else 
 		return (-1);
 }
-
-static void	bres_y(t_data *data, t_pix *start, t_pix *end)
+static void	bres_ypos(t_data *data, t_pix *start, t_pix *end)
 {
 	int x;
 	int	y;
@@ -34,6 +33,32 @@ static void	bres_y(t_data *data, t_pix *start, t_pix *end)
 	signx = signstep(start->x_adjust, end->x_adjust);
 	signy = signstep(start->y_adjust, end->y_adjust);
 	while (y < end->y_adjust)
+	{
+		my_pixel_put(&data->img, x, y, start->color);
+		y+=signy;
+		if (p < 0)
+		 	p = p + (2 * data->dx);
+		else 
+		{
+			x += signx;
+			p = p + (2 * data->dx) - (2 * data->dy);
+		}
+	}
+}
+static void	bres_yneg(t_data *data, t_pix *start, t_pix *end)
+{
+	int x;
+	int	y;
+	int p;
+	int signx;
+	int signy;
+
+	x = start->x_adjust;
+	y = start->y_adjust;
+	p = 2 * data->dx - data->dy;
+	signx = signstep(start->x_adjust, end->x_adjust);
+	signy = signstep(start->y_adjust, end->y_adjust);
+	while (y > end->y_adjust)
 	{
 		my_pixel_put(&data->img, x, y, start->color);
 		y+=signy;
@@ -95,15 +120,28 @@ static void	bres_xpos(t_data *data, t_pix *start, t_pix *end)
 		}
 	}
 }
+static void	bres_y(t_data *data, t_pix *start, t_pix *end)
+{
+
+//	int signx;
+	int signy;
+
+//	signx = signstep(start->x_adjust, end->x_adjust);
+	signy = signstep(start->y_adjust, end->y_adjust);
+	if (signy == 1)
+		bres_ypos(data, start, end);
+	else
+		bres_yneg(data, start, end);
+}
 
 static void	bres_x(t_data *data, t_pix *start, t_pix *end)
 {
 
 	int signx;
-	int signy;
+//	int signy;
 
 	signx = signstep(start->x_adjust, end->x_adjust);
-	signy = signstep(start->y_adjust, end->y_adjust);
+//	signy = signstep(start->y_adjust, end->y_adjust);
 	if (signx == 1)
 		bres_xpos(data, start, end);
 	else
@@ -125,6 +163,7 @@ void	bresenham(t_data *data, t_pix *start, t_pix *end)
 		bres_y(data, start, end);
 	my_pixel_put(&data->img, end->x_adjust, end->y_adjust, end->color);
 }
+
 void	draw_lines(t_data *data, t_pix **head)
 {
 	t_pix	*current;
@@ -161,3 +200,29 @@ int render(t_data *data)
 	return (0);
 }
 
+/*static void	bres_x(t_data *data, t_pix *start, t_pix *end)
+{
+	int x;
+	int	y;
+	int p;
+	int signy;
+	int signx;
+
+	x = start->x_adjust;
+	y = start->y_adjust;
+	p = 2 * data->dy - data->dx;
+	signy = signstep(start->y_adjust, end->y_adjust);
+	signx = signstep(start->x_adjust, end->x_adjust);
+	while (x < end->x_adjust)
+	{
+		my_pixel_put(&data->img, x, y, start->color);
+		x+=signx;
+		if (p < 0)
+			p = p + (2 * data->dy);
+		else 
+		{
+			p = p + (2 * data->dy) - (2 * data->dx);
+			y+=signy;
+		}
+	}
+}*/

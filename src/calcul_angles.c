@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_angles.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:54:29 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/12 16:38:36 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:16:55 by sonia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	img_centering(t_data *data)
 	t_pix	*current;
 
 	current = data->node;
-	dx = (IMGX * 0.8) / (data->x_colunms * 2 );
-	dy = (IMGY * 0.8) / (data->y_row * 2); 
+	dx = (IMGX * 0.9) / (data->x_colunms * 2 );
+	dy = (IMGY * 0.9) / (data->y_row * 2); 
 	if (data->x_colunms > 200 || data->y_row > 200)
 		data->shift = 1;
-	else if (dx > 30 || dy > 30)
-		data->shift = 20;
+	else if (dx > 30 && dy > 30)
+		data->shift = 30;
 	else if (dx <= dy && data->x_colunms < 200 )
 		data->shift = dx;
 	else
@@ -61,23 +61,23 @@ void	adj_coord(t_data *data, t_pix **head)
 	int		y_orig;
 
 	current = *head;
-	// if (data->shift == 1)
-	// {
-	// 	x_orig = WINX/2;
-	// 	y_orig = WINY/3;
-	// }
-	// else 
-	// {
+	if (data->xtot_hypo < WINX && data->ytot_hypo < WINY)
+	{
+		x_orig = WINX/2;
+	 	y_orig = WINY/3;
+	}
+	else 
+	{
 		x_orig = WINX/2 - data->shift * data->x_colunms;
 		y_orig = WINY/2 - data->shift * data->y_row;
-	// }
-	ft_printf("x_orig=%d\ty_orig=%d\n", x_orig, y_orig);
+	}
+	ft_printf("WINX/2=%d\tx_orig=%d\tWINY/2=%d\ty_orig=%d\n", WINX/2, x_orig, WINY/2, y_orig);
 	while (current)
 	{
 		while (current)
 		{
 			current->x_adjust = x_orig + (current->x_pix - current->y_pix) * cos(TETA) ;
-			current->y_adjust = y_orig + (current->y_pix + current->x_pix) * sin(TETA) -(current->z_map * data->shift * sin(TETA));
+			current->y_adjust = y_orig + (current->y_pix + current->x_pix) * sin(TETA) -(current->z_map * data->shift *sin(TETA));
 			current = current->next;
 		}
 	}
