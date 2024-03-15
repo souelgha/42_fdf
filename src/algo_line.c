@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:56:30 by sonia             #+#    #+#             */
-/*   Updated: 2024/03/13 16:52:08 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/15 14:41:37 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,8 @@ static void	bres_xpos(t_data *data, t_pix *start, t_pix *end)
 static void	bres_y(t_data *data, t_pix *start, t_pix *end)
 {
 
-//	int signx;
 	int signy;
 
-//	signx = signstep(start->x_adjust, end->x_adjust);
 	signy = signstep(start->y_adjust, end->y_adjust);
 	if (signy == 1)
 		bres_ypos(data, start, end);
@@ -138,10 +136,8 @@ static void	bres_x(t_data *data, t_pix *start, t_pix *end)
 {
 
 	int signx;
-//	int signy;
 
 	signx = signstep(start->x_adjust, end->x_adjust);
-//	signy = signstep(start->y_adjust, end->y_adjust);
 	if (signx == 1)
 		bres_xpos(data, start, end);
 	else
@@ -185,7 +181,7 @@ void	points(t_data *data)
 	current = data->node;
 	while (current)
 	{
-		my_pixel_put(&data->img, current->x_adjust, current->y_adjust, current->color);
+		my_pixel_put(&data->img, current->x_adjust, current->y_adjust, 0xFFFF00);
 		current = current->next;
 	}
 }
@@ -196,7 +192,7 @@ int render(t_data *data)
 		return (1);
 //	points(data);
 	draw_lines(data, &data->node);
-	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, 0, 50);
+	mlx_put_image_to_window(data->mlx_connect, data->mlx_window, data->img.img_ptr, 0, 0);
 	return (0);
 }
 

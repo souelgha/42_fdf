@@ -3,7 +3,7 @@ NAME = fdf
 
 #COMPIL
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g3#-Wall -Wextra -Werror -g
 CLIBX = -lXext -lX11
 
 #DIRECTORY

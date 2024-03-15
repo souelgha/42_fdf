@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_angles.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonia <sonia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:54:29 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/13 15:16:55 by sonia            ###   ########.fr       */
+/*   Updated: 2024/03/15 15:21:16 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	img_centering(t_data *data)
 	current = data->node;
 	dx = (IMGX * 0.9) / (data->x_colunms * 2 );
 	dy = (IMGY * 0.9) / (data->y_row * 2); 
-	if (data->x_colunms > 200 || data->y_row > 200)
-		data->shift = 1;
-	else if (dx > 30 && dy > 30)
-		data->shift = 30;
-	else if (dx <= dy && data->x_colunms < 200 )
+	if (data->x_colunms >= 200 && data->y_row >= 200)
+		data->shift = 2;
+	else if ((data->x_colunms >= 100 && data->x_colunms <= 200) || (data->y_row >= 100 && data->y_row <= 200))
+		data->shift = 6;
+	else if ((data->x_colunms >= 50 && data->x_colunms < 100) || (data->y_row >= 50 && data->y_row < 100))
+		data->shift = 10;
+	else if (dx > 40 && dy > 40 && (data->x_colunms > 20 || data->y_row > 20))
+		data->shift = 40;
+	else if (dx <= dy)
 		data->shift = dx;
 	else
 		data->shift = dy;
@@ -63,76 +67,35 @@ void	adj_coord(t_data *data, t_pix **head)
 	current = *head;
 	if (data->xtot_hypo < WINX && data->ytot_hypo < WINY)
 	{
-		x_orig = WINX/2;
+		x_orig = WINX/3;
 	 	y_orig = WINY/3;
+	}
+	else if (data->shift == 2 || data->shift == 6)
+	{
+		x_orig = WINX/3;
+		y_orig = WINY/4;
 	}
 	else 
 	{
 		x_orig = WINX/2 - data->shift * data->x_colunms;
 		y_orig = WINY/2 - data->shift * data->y_row;
 	}
-	ft_printf("WINX/2=%d\tx_orig=%d\tWINY/2=%d\ty_orig=%d\n", WINX/2, x_orig, WINY/2, y_orig);
+	ft_printf("WINX/2=%d\tWINX/3=%d\tx_orig=%d\tWINY/2=%d\tWINY/3=%d\ty_orig=%d\n", WINX/2, WINX/3, x_orig, WINY/2, WINY/3, y_orig);
+	if (data->shift >= 40)
+		data->ratio_z = data->shift * 0.08;
+	else if (data->shift >= 20 && data->shift < 40)
+		data->ratio_z = data->shift * 0.2;
+	else if (data->shift >= 10 && data->shift < 20)
+		data->ratio_z = data->shift * 0.5;
+	else if (data->shift < 10 && data->shift > 2)
+		data->ratio_z = data->shift * 0.6;
+	else if (data->shift == 2)
+		data->ratio_z = data->shift ;
+	printf("ratio_z=%d\n", data->ratio_z);
 	while (current)
 	{
-		while (current)
-		{
-			current->x_adjust = x_orig + (current->x_pix - current->y_pix) * cos(TETA) ;
-			current->y_adjust = y_orig + (current->y_pix + current->x_pix) * sin(TETA) -(current->z_map * data->shift *sin(TETA));
-			current = current->next;
-		}
+		current->x_adjust = x_orig + (current->x_pix * cos(TETA) - current->y_pix * sin(TETA))  ;
+		current->y_adjust = y_orig + ((current->y_pix * cos(TETA) + current->x_pix * sin(TETA))) / 2 - (current->z_map  * data->ratio_z);
+		current = current->next;
 	}
 }
-// void	isometric(t_dot *dot, double angle)
-// {
-// 	dot->x = (dot->x - dot->y) * cos(angle);
-// 	dot->y = (dot->x + dot->y) * sin(angle) - dot->z;
-// }
-// void	int_to_isometric_pixel(t_date *info, t_point **head)
-// {
-// 	t_point	*current;
-
-// 	current = *head;
-// 	while (current != NULL)
-// 	{
-// 		current->x_pixel = (info->center_x) + ((current->x_map - current->y_map)
-// 				* cos(PI / 6) * info->scaling);
-// 		current->y_pixel = (info->center_y) - (current->z_map * sin(PI / 6)
-// 				* info->scaling) + ((current->x_map + current->y_map)
-// 				* sin(PI / 6) * info->scaling);
-// 		current = current->next;
-// 	}
-//}
-// void	adj_coord(t_data *data, t_pix **head)
-// {
-// 	t_pix	*current;
-// 	int		x_orig;
-
-// 	current = *head;
-// 	if (data->shift == 2)
-// 		x_orig = WINX/2;
-// 	else 
-// 		x_orig = data->y_row / tan(TETA) * data->shift + 50;
-// 	ft_printf("x_orig=%d\n", x_orig);
-// 	while (current)
-// 	{
-// 		while (current->line_right)
-// 		{
-// 			current->x_adjust = current->x_pix + x_orig;
-// 			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);
-// 			current = current->next;
-// 		}
-// 		if (current)
-// 		{
-// 			current->x_adjust = current->x_pix + x_orig;
-// 			current->y_adjust = current->y_pix + current->x_pix * tan(TETA);		
-// 			current = current->next;			
-// 		}
-// 		x_orig = x_orig - data->shift;
-// 		if (current)
-// 		{
-// 			current->x_adjust = x_orig;
-// 			current->y_adjust = current->y_pix;
-// 			current = current->next;
-// 		}
-// 	}
-// }

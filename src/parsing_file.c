@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:20:21 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/11 15:58:07 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:05:17 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ int	pars_file(char *file, t_pix **map) //argv[1] & list
 			initmap(map, i, j, pixel[i]);
 			i++;
 		}
+	//	printf("iparsing=%d\n",i);
 		free(next_line);
 		free(pixel);
 		next_line = get_next_line(fd);
 		j++;	
 		i = 0;
 	}
+	// printf("j=%d\n",j);
 	free(next_line);
     return (0);
 }

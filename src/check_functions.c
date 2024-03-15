@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:43:24 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/11 15:58:33 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:48:14 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void file_colums_rows(t_data *data, t_pix *lst)
 		i++;
 		ptr = ptr->line_right;
 	}
-	data->x_colunms = i;
+	data->x_colunms = i + 1;
 	ft_printf("colunms= %d\t", data->x_colunms);
 	ptr = lst;
 	while (ptr)
@@ -61,7 +61,7 @@ void file_colums_rows(t_data *data, t_pix *lst)
 			j++;
 		ptr = ptr->next;
 	}
-	data->y_row = j;
+	data->y_row = j + 1;
 	ft_printf("rows= %d\n", data->y_row);
 }
 

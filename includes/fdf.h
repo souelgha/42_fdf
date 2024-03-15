@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/12 11:41:49 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:11:53 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@
 # define WINY 1080
 # define IMGX 1920	
 # define IMGY 1080
-# define TETA 0.5236 //sur x
-
-
+# define TETA 0.5236 
+//# define TETA 0.8727 
+//# define TETA 0.7854
 typedef struct s_img
 {
-	void	*img_ptr; //ptr sur l image
-	char	*addr_pix; //adress du 1er pixel
-	int		bpp; //bit/pixel 
-	int		line_len; //longueur de l image
-	int		endian; // type d endian
+	void	*img_ptr;
+	char	*addr_pix;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_img;
 
 
@@ -54,8 +54,8 @@ typedef struct s_pix
 	int				x_adjust;
 	int				y_adjust;
 	struct s_pix	*next;
-	struct s_pix	*line_down;	// lien vers le bas
-	struct s_pix	*line_right; // lien vers la droite 
+	struct s_pix	*line_down;	
+	struct s_pix	*line_right; 
 
 }	t_pix;
 
@@ -65,11 +65,12 @@ typedef struct	s_data
 	void	*mlx_window;
 	int		x_colunms;
 	int		y_row;
-	int		xtot_hypo; //valeur en xpixels
+	int		xtot_hypo; 
 	int		ytot_hypo;
 	int		dx;
 	int		dy;
 	int		shift;
+	int	ratio_z;
 	t_img	img;
 	t_pix	*node;
 }	t_data;
