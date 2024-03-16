@@ -6,32 +6,29 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/15 14:11:53 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 13:31:41 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef FDF_H
+#ifndef FDF_H
 # define FDF_H
 
-#include "../minilibx-linux/mlx.h"
-#include "../libft/includes/libft.h"
-#include "../libft/includes/get_next_line.h"
-#include "../libft/includes/ft_printf.h"
-#include <stdlib.h>
-#include <stdint.h>
-#include <math.h>
-#include <X11/keysym.h>
-#include <X11/Xlib.h>
-#include <stdio.h>
-#include <fcntl.h>
+# include "../minilibx-linux/mlx.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h"
+# include "../libft/includes/ft_printf.h"
+# include <stdlib.h>
+# include <stdint.h>
+# include <math.h>
+# include <X11/keysym.h>
+# include <X11/Xlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 
 # define WINX 1920	
 # define WINY 1080
-# define IMGX 1920	
-# define IMGY 1080
-# define TETA 0.5236 
-//# define TETA 0.8727 
-//# define TETA 0.7854
+# define TETA 0.5236
+
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -40,7 +37,6 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
-
 
 /*** structure du point dans la map ***/
 typedef struct s_pix
@@ -55,59 +51,53 @@ typedef struct s_pix
 	int				y_adjust;
 	struct s_pix	*next;
 	struct s_pix	*line_down;	
-	struct s_pix	*line_right; 
-
+	struct s_pix	*line_right;
 }	t_pix;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*mlx_connect;
 	void	*mlx_window;
 	int		x_colunms;
 	int		y_row;
-	int		xtot_hypo; 
+	int		xtot_hypo;
 	int		ytot_hypo;
 	int		dx;
 	int		dy;
 	int		shift;
-	int	ratio_z;
+	int		ratio_z;
 	t_img	img;
 	t_pix	*node;
 }	t_data;
 
-/****structure du fichier *****/
-typedef struct s_file
-{
-	int	x;  
-	int	y;
-	int	pix;
-
-}	t_file;
-
 int				close_win(t_data *data);
-int				handle_keypress(int keysym, t_data *data);
-int 			code_trgb(int t, int red, int green, int blue);
-unsigned long	ft_atoi_hexa(const char *str);
-void			my_pixel_put(t_img *img,int x, int y, int color);
-int				render(t_data *data);
-int				keyfunc(int keysym);
+void			global_set(t_data *data);
 int				config_win_img(t_data *data);
-int 			check_arg(int argc, char **argv);
+
+int				check_arg(int argc, char **argv);
 int				pars_file(char *file, t_pix **pix);
-t_pix			*newpix(int	i, int j, char *pixel);
+unsigned long	ft_atoi_hexa(const char *str);
+void			my_pixel_put(t_img *img, int x, int y, int color);
+int				render(t_data *data);
+int				handle_keypress(int keysym, t_data *data);
+int				keyfunc(int keysym);
 void			initmap(t_pix **map, int i, int j, char *pix);
-void			ft_lstclear_s(t_pix **lst);
+t_pix			*newpix(int i, int j, char *pixel);
 void			ft_lstadd_back_s(t_pix **lst, t_pix *new_node);
 void			affiche_list(t_pix *map);
-void 			connect_right(t_pix *head);
-void 			connect_down(t_pix *head);
-//void 	file_colums_rows(t_data *data);
-void 			file_colums_rows(t_data *data, t_pix *pix);
-void			img_centering(t_data *data);
+void			ft_lstclear_s(t_pix **lst);
+void			destroy_fct(t_data *data);
+void			get_free(char **tab);
+void			connect_right(t_pix *head);
+void			connect_down(t_pix *head);
+void			file_colums_rows(t_data *data, t_pix *pix);
+void			img_settings(t_data *data);
 void			perimetre_total(t_data *data);
 void			adj_coord(t_data *data, t_pix **head);
 void			points(t_data *data);
-void			destroy_fct(t_data *data);
+void			draw_lines(t_data *data, t_pix **head);
+int				signstep(int start, int end);
+void			bres_x(t_data *data, t_pix *start, t_pix *end);
+void			bres_y(t_data *data, t_pix *start, t_pix *end);
 
-
-# endif
+#endif

@@ -3,7 +3,7 @@ NAME = fdf
 
 #COMPIL
 CC = cc
-CFLAGS = -g3#-Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g3
 CLIBX = -lXext -lX11
 
 #DIRECTORY
@@ -19,9 +19,11 @@ SRC =  	fdf.c\
 		check_functions.c\
 		parsing_file.c\
 		lst_utils.c\
+		line_utils.c\
 		algo_line.c\
 		utils_mlx.c\
-		calcul_angles.c
+		calcul_angles.c\
+		init_map.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

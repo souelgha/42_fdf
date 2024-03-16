@@ -6,13 +6,12 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:11:18 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/01/30 15:00:55 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:36:46 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
-
 
 char	*ft_readbuffer(int fd, char *str)
 {

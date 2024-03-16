@@ -6,12 +6,11 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 11:03:17 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/02/23 14:40:59 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:38:13 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 int	ft_atoi(const char *str)
 {

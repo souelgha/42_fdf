@@ -6,13 +6,13 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:20:58 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/12 13:39:13 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:20:02 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"fdf.h"
 
-/** ******free la list *************/
+/*********free la list *************/
 void	ft_lstclear_s(t_pix **lst)
 {
 	t_pix	*tmp;
@@ -29,25 +29,6 @@ void	ft_lstclear_s(t_pix **lst)
 	*lst = NULL;
 }
 
-/*********** inserer le node en fin de liste ******************/
-void	ft_lstadd_back_s(t_pix **lst, t_pix *new_node)
-{
-	t_pix	*ptr;
-
-	ptr = *lst;
-	if (*lst == NULL)
-	{
-		*lst = new_node;
-		new_node->next = NULL;
-	}
-	else
-	{
-		while (ptr->next != NULL)
-			ptr = ptr->next;
-		ptr->next = new_node;
-	}
-}
-
 void	get_free(char **tab)
 {
 	int	i;
@@ -61,40 +42,6 @@ void	get_free(char **tab)
 	free(tab);
 }
 
-/***********imit map *************************/
-void	initmap(t_pix **map, int i, int j, char *pixi)
-{
-	t_pix	*newpx;
-
-	newpx = newpix(i, j, pixi);
-	ft_lstadd_back_s(map, newpx);
-	free(pixi);
-}
-
-t_pix	*newpix(int i, int j, char *pixel)
-{
-	char	**data;
-	t_pix	*new_node;
-
-	new_node = malloc(sizeof(t_pix));
-	if (new_node == NULL)
-		return (NULL);
-	new_node->x_map = i;
-	new_node->y_map = j;
-	data = ft_split(pixel, ',');
-	new_node->z_map = ft_atoi(data[0]);
-	new_node->color = ft_atoi_hexa(data[1]);
-	new_node->x_pix = i * 10;
-	new_node->y_pix = j * 10;
-	new_node->x_adjust = 0;
-	new_node->y_adjust = 0;
-	new_node->line_down = NULL;
-	new_node->line_right = NULL;
-	new_node->next = NULL;
-	get_free(data);
-	return (new_node);
-}
-
 void	affiche_list(t_pix *map)
 {
 	t_pix	*ptr;
@@ -104,42 +51,10 @@ void	affiche_list(t_pix *map)
 	{
 		ft_printf("ptr<%p>\tx_map(%d)\ty_map(%d)\tz_map(%d)\tcol(%d)\t"
 			"x_p(%d)\ty_p(%d)\tx_ad(%d)\ty_ad(%d)\t\nnext<%p>\t"
-			"down<%p>\tright<%p>\n", 
-					ptr, ptr->x_map, ptr->y_map, ptr->z_map, ptr->color,
-					ptr->x_pix, ptr->y_pix, ptr->x_adjust, ptr->y_adjust,
-					ptr->next, ptr->line_down, ptr->line_right);
-		ptr = ptr->next;
-	}
-}
-
-void	connect_right(t_pix *head)
-{
-	t_pix	*ptr;
-
-	ptr = head;
-	while (ptr->next != NULL)
-	{
-		if (ptr->next->y_map == ptr->y_map)
-			ptr->line_right = ptr->next;
-		ptr = ptr->next;
-	}
-}
-
-void	connect_down(t_pix *head)
-{
-	t_pix	*ptr;
-	t_pix	*current;
-
-	current = head;
-	ptr = head;	
-	while (ptr->line_right)
-		ptr = ptr->next;
-	ptr = ptr->next;
-	while (ptr)
-	{
-		if (ptr->x_map == current->x_map)
-			current->line_down = ptr;
-		current = current->next;
+			"down<%p>\tright<%p>\n",
+			ptr, ptr->x_map, ptr->y_map, ptr->z_map, ptr->color,
+			ptr->x_pix, ptr->y_pix, ptr->x_adjust, ptr->y_adjust,
+			ptr->next, ptr->line_down, ptr->line_right);
 		ptr = ptr->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:00:48 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/01/30 11:25:35 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:37:32 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,4 @@ char	*ft_itoa(int n)
 	}
 	str[count_digit(n) + sign_digit(n)] = '\0';
 	return (str);
-}
-
-#include<limits.h>	
-int	main(void)
-{
-//	int	n = INT_MIN;
-	int n = 14580;
-	char *str;
-	printf("count=%d\n", count_digit(n));
-	printf("sign=%d\n", sign_digit(n));
-	str = ft_itoa(n);
-	printf("%s\n", str);
-	free(str);
-	return (0);
 }

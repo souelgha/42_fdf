@@ -6,13 +6,13 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:43:24 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/14 14:48:14 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:26:19 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int check_arg(int argc, char **argv)
+int	check_arg(int argc, char **argv)
 {
 	if (argc != 2)
 	{
@@ -24,7 +24,7 @@ int check_arg(int argc, char **argv)
 		ft_putstr_fd("invalide file name\n", 1);
 		return (0);
 	}
-	if (argc == 2 && ((ft_strncmp(".fdf", ft_strchr(argv[1], '.'), 4))))
+	if (argc == 2 && ((ft_strncmp(".fdf", ft_strrchr(argv[1], '.'), 4))))
 	{
 		ft_putstr_fd("invalide file extension\n", 1);
 		return (0);
@@ -36,32 +36,3 @@ int check_arg(int argc, char **argv)
 	}	
 	return (1);
 }
-
-/** nombre le lignes et colonnes dans le fichier.. a rechecker*/
-void file_colums_rows(t_data *data, t_pix *lst) 
-{
-	t_pix *ptr;
-	int 	i;
-	int		j;
-	
-	ptr = lst;
-	i = 0;
-	j = 0;
-	while (ptr->line_right != NULL)
-	{
-		i++;
-		ptr = ptr->line_right;
-	}
-	data->x_colunms = i + 1;
-	ft_printf("colunms= %d\t", data->x_colunms);
-	ptr = lst;
-	while (ptr)
-	{
-		if(ptr->y_map == (j + 1))
-			j++;
-		ptr = ptr->next;
-	}
-	data->y_row = j + 1;
-	ft_printf("rows= %d\n", data->y_row);
-}
-

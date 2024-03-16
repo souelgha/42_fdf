@@ -6,19 +6,25 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:20:21 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/15 11:05:17 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:55:57 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	pars_file(char *file, t_pix **map) //argv[1] & list
+static void	ft_free(char *str, char **tab)
 {
-    int		fd;
+	free(str);
+	free(tab);
+}
+
+int	pars_file(char *file, t_pix **map)
+{
+	int		fd;
 	int		i;
 	int		j;
-    char	*next_line;
-	char 	**pixel;
+	char	*next_line;
+	char	**pixel;
 
 	fd = open(file, O_RDONLY);
 	i = 0;
@@ -32,33 +38,30 @@ int	pars_file(char *file, t_pix **map) //argv[1] & list
 			initmap(map, i, j, pixel[i]);
 			i++;
 		}
-	//	printf("iparsing=%d\n",i);
-		free(next_line);
-		free(pixel);
+		ft_free(next_line, pixel);
 		next_line = get_next_line(fd);
-		j++;	
+		j++;
 		i = 0;
 	}
-	// printf("j=%d\n",j);
 	free(next_line);
-    return (0);
+	return (0);
 }
+
 /*** renvoie le code couleur du banc si pas de donnees de color ***/
 unsigned long	ft_atoi_hexa(const char *str)
 {
 	const char		*hex;
 	unsigned long	result;
 	const char		*ptr;
-	int 			i;
+	int				i;
 
 	hex = "0123456789ABCDEF";
-	result = 0;	
+	result = 0;
 	if (!str)
 		return (16777215);
 	i = 2;
 	while (str[i] != '\0' && str[i] != '\n')
 	{
-		
 		ptr = ft_strchr(hex, ft_toupper(str[i]));
 		if (ptr == NULL)
 			break ;
