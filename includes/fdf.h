@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:37:11 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/16 13:31:41 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/18 12:10:13 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@
 # include <math.h>
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
-# include <stdio.h>
 # include <fcntl.h>
-
-# define WINX 1920	
-# define WINY 1080
-# define TETA 0.5236
 
 typedef struct s_img
 {
@@ -58,6 +53,8 @@ typedef struct s_data
 {
 	void	*mlx_connect;
 	void	*mlx_window;
+	int		winx;
+	int		winy;
 	int		x_colunms;
 	int		y_row;
 	int		xtot_hypo;
@@ -73,7 +70,6 @@ typedef struct s_data
 int				close_win(t_data *data);
 void			global_set(t_data *data);
 int				config_win_img(t_data *data);
-
 int				check_arg(int argc, char **argv);
 int				pars_file(char *file, t_pix **pix);
 unsigned long	ft_atoi_hexa(const char *str);
@@ -92,7 +88,6 @@ void			connect_right(t_pix *head);
 void			connect_down(t_pix *head);
 void			file_colums_rows(t_data *data, t_pix *pix);
 void			img_settings(t_data *data);
-void			perimetre_total(t_data *data);
 void			adj_coord(t_data *data, t_pix **head);
 void			points(t_data *data);
 void			draw_lines(t_data *data, t_pix **head);

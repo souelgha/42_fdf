@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:54:29 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/16 15:13:52 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:07:08 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	img_settings(t_data *data)
 	t_pix	*current;
 
 	current = data->node;
-	dx = (WINX * 0.9) / (data->x_colunms * 2);
-	dy = (WINY * 0.9) / (data->y_row * 2);
+	data->winx = 1920;
+	data->winy = 1080;
+	dx = (data->winx * 0.9) / (data->x_colunms * 2);
+	dy = (data->winy * 0.9) / (data->y_row * 2);
 	shifting_def(data, dx, dy);
 	ft_printf("dx=%d\tdy=%d\tshift= %d\n", dx, dy, data->shift);
 	while (current)
@@ -72,21 +74,19 @@ void	adj_coord(t_data *data, t_pix **head)
 	int		y_orig;
 
 	current = *head;
-	x_orig = WINX / 3;
+	x_orig = data->winx / 3;
 	if (data->shift == 2 || data->shift == 6)
-		y_orig = WINY / 4;
+		y_orig = data->winy / 4;
 	else
-		y_orig = WINY / 3;
-	ft_printf("WINX/2=%d\tWINX/3=%d\tx_orig=%d\nWINY/2=%d\tWINY/3=%d\ty_orig=%d\n",
-		WINX / 2, WINX / 3, x_orig, WINY / 2, WINY / 3, y_orig);
+		y_orig = data->winy / 3;
 	scale_z(data);
 	ft_printf("ratio_z=%d\n", data->ratio_z);
 	while (current)
 	{
-		current->x_adjust = x_orig + (current->x_pix * cos(TETA)
-				- current->y_pix * sin(TETA));
-		current->y_adjust = y_orig + ((current->y_pix * cos(TETA)
-					+ current->x_pix * sin(TETA))) / 2
+		current->x_adjust = x_orig + (current->x_pix * cos(0.5236)
+				- current->y_pix * sin(0.5236));
+		current->y_adjust = y_orig + ((current->y_pix * cos(0.5236)
+					+ current->x_pix * sin(0.526))) / 2
 			- (current->z_map * data->ratio_z);
 		current = current->next;
 	}

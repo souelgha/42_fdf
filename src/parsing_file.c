@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:20:21 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/16 12:55:57 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:07:35 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ unsigned long	ft_atoi_hexa(const char *str)
 {
 	const char		*hex;
 	unsigned long	result;
-	const char		*ptr;
 	int				i;
+	int				j;
 
 	hex = "0123456789ABCDEF";
 	result = 0;
@@ -62,10 +62,10 @@ unsigned long	ft_atoi_hexa(const char *str)
 	i = 2;
 	while (str[i] != '\0' && str[i] != '\n')
 	{
-		ptr = ft_strchr(hex, ft_toupper(str[i]));
-		if (ptr == NULL)
-			break ;
-		result = result * 16 + (ptr - hex);
+		j = 0;
+		while (hex[j] != ft_toupper(str[i]))
+			j++;
+		result = result * 16 + j;
 		i++;
 	}
 	return (result);

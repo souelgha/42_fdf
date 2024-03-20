@@ -3,7 +3,7 @@ NAME = fdf
 
 #COMPIL
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 CLIBX = -lXext -lX11
 
 #DIRECTORY
@@ -11,7 +11,7 @@ SRC_PATH = src/
 OBJ_PATH = obj/
 HEADER_FOLDER = includes
 
-ARGS = 42.fdf
+ARGS = test_maps/42.fdf
 
 #SOURCES
 SRC =  	fdf.c\
@@ -53,7 +53,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 clean:
 	rm -rf $(OBJ_PATH)
 	make clean -C ./minilibx-linux
-	make clean -C ./libft
+	make fclean -C ./libft
 	rm -f libmlx.a
 	rm -f libft.a
 	@echo "$(CLEAR) $(BLUE) cleaned $(RESET)"

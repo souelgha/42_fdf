@@ -6,7 +6,7 @@
 /*   By: sonouelg <sonouelg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:42:33 by sonouelg          #+#    #+#             */
-/*   Updated: 2024/03/16 15:01:54 by sonouelg         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:28:10 by sonouelg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	main(int argc, char **argv)
 		data.img.line_len, data.img.bpp, data.img.endian);
 	mlx_hook(data.mlx_window, 17, 1L << 5, close_win, &data);
 	mlx_hook(data.mlx_window, KeyPress, KeyPressMask, handle_keypress, &data);
-	mlx_key_hook(data.mlx_window, keyfunc, 0);
 	mlx_loop(data.mlx_connect);
-	destroy_fct(&data);
 	return (0);
 }
