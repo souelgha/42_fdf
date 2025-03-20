@@ -4,6 +4,6 @@ discover graphic library : miniLibx
 - use isometric projection
 - introduce event programming
 
-  ![julia](https://github.com/souelgha/42_fdf/fdf1.png)
+  ![Apercu](https://github.com/souelgha/42_fdf/fdf1.png)
 
-  ![42](https://github.com/souelgha/42_fdf/fdf2.png)
+  ![Apercu](https://github.com/souelgha/42_fdf/fdf2.png)
