@@ -4,6 +4,17 @@ discover graphic library : miniLibx
 - use isometric projection
 - introduce event programming
 
+## Build and start
+Build 
+```bash
+make
+```
+then run
+```bash
+./fdf <file.fdf>
+```  
+  
+
   ![Apercu](https://github.com/souelgha/42_fdf/blob/main/fdf1.png)
 
   ![Apercu](https://github.com/souelgha/42_fdf/blob/main/fdf2.png)
