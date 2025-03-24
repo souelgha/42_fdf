@@ -5,8 +5,8 @@
 - introduce event programming
 
 
-- we used Bresenham algorithm  to draw the lines
-  ![Bresenham](https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham)
+- we used [Bresenham](https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham) algorithm  to draw the lines
+
 
 ## Build and start
 Build 
