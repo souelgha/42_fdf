@@ -1,12 +1,10 @@
 # Creating a simplified 3D graphic representation of a relief landscape: Fil De Fer
-- discover graphic library : miniLibx 
+- discover graphic library : miniLibx.
 - the coordinates of this landscape are stored in a file passed as a parameter(x,y,z).
-- use isometric projection
-- introduce event programming
+- use isometric projection.
+- introduce event programming.
 
-
-- we used [Bresenham](https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham) algorithm  to draw the lines
-
+- I used [Bresenham](https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham) algorithm  to draw the lines.
 
 ## Build and start
 Build 
